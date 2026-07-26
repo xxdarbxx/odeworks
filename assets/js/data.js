@@ -5,7 +5,15 @@
 // so this file is a drop-in stand-in for a real backend. When Supabase (or
 // any other DB) is wired up, each of these arrays becomes a `SELECT *` call
 // instead — see assets/js/api.js for where that swap happens.
+//
+// Photos are real (Unsplash), not placeholders — swap the IDs below for your
+// own shop photos whenever you have them; the `unsplash()` helper just adds
+// consistent sizing/format params to the direct image URL.
 // ============================================================================
+
+function unsplash(photoId, width) {
+  return `https://images.unsplash.com/${photoId}?auto=format&fit=crop&w=${width}&q=80`;
+}
 
 export const SERVICES = [
   {
@@ -95,7 +103,7 @@ export const MECHANICS = [
     id: 'mech-01',
     name: 'Marco Villanueva',
     specialty: 'Engine Overhaul & Diagnostics',
-    photo: 'https://placehold.co/400x400/1a1a1a/fff?text=Marco',
+    photo: unsplash('photo-1638590875475-11cff42e0fc9', 400),
     bio: 'Factory-trained technician specializing in Japanese inline engines, with over a decade rebuilding high-mileage motors.',
     yearsExperience: 12
   },
@@ -103,7 +111,7 @@ export const MECHANICS = [
     id: 'mech-02',
     name: 'Rico Domingo',
     specialty: 'Suspension & Handling',
-    photo: 'https://placehold.co/400x400/1a1a1a/fff?text=Rico',
+    photo: unsplash('photo-1650569663281-44a28c984e2a', 400),
     bio: 'Suspension tuning specialist for sport and adventure bikes, dialing in ride quality for street and track use.',
     yearsExperience: 8
   },
@@ -111,7 +119,7 @@ export const MECHANICS = [
     id: 'mech-03',
     name: 'Ella Santos',
     specialty: 'Electrical & ECU Diagnostics',
-    photo: 'https://placehold.co/400x400/1a1a1a/fff?text=Ella',
+    photo: unsplash('photo-1534637950656-9e6753b6da6b', 400),
     bio: 'Our go-to for stubborn electrical gremlins and ECU fault tracing across most major brands.',
     yearsExperience: 6
   },
@@ -119,7 +127,7 @@ export const MECHANICS = [
     id: 'mech-04',
     name: 'Jomari Cruz',
     specialty: 'General Maintenance & PMS',
-    photo: 'https://placehold.co/400x400/1a1a1a/fff?text=Jomari',
+    photo: unsplash('photo-1650569663338-f6921d483868', 400),
     bio: 'Fast, thorough, and detail-obsessed — Jomari keeps our PMS turnaround times the best in the metro.',
     yearsExperience: 10
   }
@@ -161,43 +169,43 @@ export const GALLERY = [
     id: 'gal-01',
     category: 'Engine',
     title: 'Full Engine Rebuild — Yamaha 150cc',
-    before: 'https://placehold.co/800x600/2a2015/f97316?text=Before',
-    after: 'https://placehold.co/800x600/0d0d0d/00e0ff?text=After'
+    before: unsplash('photo-1534755563369-ad37931ac77b', 800),
+    after: unsplash('photo-1648300115526-e9a453146561', 800)
   },
   {
     id: 'gal-02',
     category: 'Cosmetic',
     title: 'Paint & Panel Restoration',
-    before: 'https://placehold.co/800x600/2a2015/f97316?text=Before',
-    after: 'https://placehold.co/800x600/0d0d0d/00e0ff?text=After'
+    before: unsplash('photo-1604260324056-45f7c778754a', 800),
+    after: unsplash('photo-1677344758233-6c49769a4554', 800)
   },
   {
     id: 'gal-03',
     category: 'Electrical',
     title: 'Wiring Harness Repair',
-    before: 'https://placehold.co/800x600/2a2015/f97316?text=Before',
-    after: 'https://placehold.co/800x600/0d0d0d/00e0ff?text=After'
+    before: unsplash('photo-1636761358756-ef34b4ef036a', 800),
+    after: unsplash('photo-1636761358954-cebc0e5dfebb', 800)
   },
   {
     id: 'gal-04',
     category: 'Suspension',
     title: 'Fork Seal & Oil Rebuild',
-    before: 'https://placehold.co/800x600/2a2015/f97316?text=Before',
-    after: 'https://placehold.co/800x600/0d0d0d/00e0ff?text=After'
+    before: unsplash('photo-1619677304307-d38718561a92', 800),
+    after: unsplash('photo-1646904748822-373f0fd5ea52', 800)
   },
   {
     id: 'gal-05',
     category: 'Engine',
     title: 'Carburetor Overhaul',
-    before: 'https://placehold.co/800x600/2a2015/f97316?text=Before',
-    after: 'https://placehold.co/800x600/0d0d0d/00e0ff?text=After'
+    before: unsplash('photo-1517524206127-48bbd363f3d7', 800),
+    after: unsplash('photo-1650569663338-f6921d483868', 800)
   },
   {
     id: 'gal-06',
     category: 'Cosmetic',
     title: 'Full Detailing & Ceramic Coat',
-    before: 'https://placehold.co/800x600/2a2015/f97316?text=Before',
-    after: 'https://placehold.co/800x600/0d0d0d/00e0ff?text=After'
+    before: unsplash('photo-1581858544302-c40e2254ff87', 800),
+    after: unsplash('photo-1604260324056-45f7c778754a', 800)
   }
 ];
 
@@ -208,7 +216,7 @@ export const BLOG_POSTS = [
     title: 'How Often Should You Change Your Motorcycle Oil?',
     excerpt: 'A practical maintenance guide to keep your engine running smoothly for years.',
     content: 'Oil change intervals depend on engine type, riding conditions, and oil quality.\n\nMost manufacturers recommend a change every 3,000-5,000 km for conventional oil, or up to 8,000 km for full synthetic — but stop-and-go city riding shortens that interval. Watch for darkening oil, a burnt smell, or a louder-than-usual engine as early warning signs.\n\nBring your bike in and we will check your oil condition for free during any visit, even if you are not due for a full PMS yet.',
-    coverImage: 'https://placehold.co/1200x600/0d0d0d/f97316?text=Oil+Change+Guide',
+    coverImage: unsplash('photo-1746014995710-cfb7596d8967', 1200),
     category: 'Maintenance',
     tags: ['maintenance', 'tips'],
     publishedAt: '2026-07-06'
@@ -219,7 +227,7 @@ export const BLOG_POSTS = [
     title: '5 Warning Signs Your Motorcycle Needs a Checkup',
     excerpt: 'Catch small problems before they turn into expensive repairs.',
     content: 'Strange noises, a rougher idle, delayed braking response, unusual vibration, or a check-engine light are the five most common signs riders ignore until a small issue becomes a big one.\n\nOur diagnostic bay can usually identify the root cause in under 30 minutes. If something feels off, it is almost always cheaper to check it early.',
-    coverImage: 'https://placehold.co/1200x600/0d0d0d/00e0ff?text=Warning+Signs',
+    coverImage: unsplash('photo-1703181226035-1c26d7e5f6ee', 1200),
     category: 'Diagnostics',
     tags: ['diagnostics', 'safety'],
     publishedAt: '2026-06-18'
@@ -230,7 +238,7 @@ export const BLOG_POSTS = [
     title: 'Ode Works Adds Two New Service Bays',
     excerpt: 'We are expanding our Galas, Quezon City shop to cut wait times in half.',
     content: 'To keep up with demand, we have added two new service bays and a dedicated diagnostics station. Average turnaround for routine maintenance is now same-day for morning drop-offs.\n\nBook online any time — walk-ins are still welcome, but booking guarantees your slot.',
-    coverImage: 'https://placehold.co/1200x600/0d0d0d/84cc16?text=New+Service+Bay',
+    coverImage: unsplash('photo-1771402629441-95e637743f93', 1200),
     category: 'News',
     tags: ['announcement', 'shop-news'],
     publishedAt: '2026-05-30'
