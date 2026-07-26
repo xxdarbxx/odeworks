@@ -1,0 +1,57 @@
+<aside class="admin-sidebar" id="admin-sidebar">
+  <a href="index.html" class="brand">
+    <img src="../assets/img/logo.jpg" alt="Ode Works logo">
+    <span>Ode Works</span>
+  </a>
+
+  <nav class="side-nav">
+    <span class="side-nav-label">Overview</span>
+    <a href="index.html" class="side-link" data-nav="dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="reports.html" class="side-link" data-nav="reports"><i class="fa-solid fa-chart-line"></i> Reports</a>
+
+    <span class="side-nav-label">Catalog</span>
+    <a href="products.html" class="side-link" data-nav="products"><i class="fa-solid fa-helmet-safety"></i> Products</a>
+    <a href="inventory.html" class="side-link" data-nav="inventory"><i class="fa-solid fa-motorcycle"></i> Motorcycle Inventory</a>
+    <a href="categories.html" class="side-link" data-nav="categories"><i class="fa-solid fa-layer-group"></i> Categories</a>
+    <a href="brands.html" class="side-link" data-nav="brands"><i class="fa-solid fa-tag"></i> Brands</a>
+
+    <span class="side-nav-label">Sales</span>
+    <a href="orders.html" class="side-link" data-nav="orders"><i class="fa-solid fa-bag-shopping"></i> Orders</a>
+    <a href="customers.html" class="side-link" data-nav="customers"><i class="fa-regular fa-user"></i> Customers</a>
+    <a href="promotions.html" class="side-link" data-nav="promotions"><i class="fa-solid fa-percent"></i> Promotions</a>
+
+    <span class="side-nav-label">Service</span>
+    <a href="appointments.html" class="side-link" data-nav="appointments"><i class="fa-regular fa-calendar-check"></i> Appointments</a>
+    <a href="mechanics.html" class="side-link" data-nav="mechanics"><i class="fa-solid fa-user-gear"></i> Mechanics</a>
+
+    <span class="side-nav-label">Content</span>
+    <a href="blog.html" class="side-link" data-nav="blog"><i class="fa-solid fa-newspaper"></i> Blog</a>
+    <a href="cms.html" class="side-link" data-nav="cms"><i class="fa-solid fa-images"></i> CMS / Banners</a>
+
+    <span class="side-nav-label">System</span>
+    <a href="users.html" class="side-link" data-nav="users"><i class="fa-solid fa-users-gear"></i> Users</a>
+    <a href="settings.html" class="side-link" data-nav="settings"><i class="fa-solid fa-gear"></i> Settings</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="../index.html" class="side-link"><i class="fa-solid fa-arrow-left"></i> Back to Site</a>
+    <a href="#" class="side-link" id="admin-logout-btn" style="color:var(--color-danger);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </div>
+</aside>
+
+<script type="module">
+  const current = window.location.pathname.split('/').pop() || 'index.html';
+  const map = {
+    'index.html': 'dashboard', 'products.html': 'products', 'inventory.html': 'inventory',
+    'categories.html': 'categories', 'brands.html': 'brands', 'customers.html': 'customers',
+    'orders.html': 'orders', 'appointments.html': 'appointments', 'mechanics.html': 'mechanics',
+    'blog.html': 'blog', 'promotions.html': 'promotions', 'cms.html': 'cms',
+    'reports.html': 'reports', 'users.html': 'users', 'settings.html': 'settings'
+  };
+  const active = map[current];
+  if (active) document.querySelector(`[data-nav="${active}"]`)?.classList.add('active');
+
+  import('../assets/js/admin/admin-auth.js').then(({ signOutAdmin }) => {
+    document.getElementById('admin-logout-btn').addEventListener('click', (e) => { e.preventDefault(); signOutAdmin(); });
+  });
+</script>

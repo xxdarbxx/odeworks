@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | Ode Works</title>
+  <link rel="icon" href="../assets/img/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/customer.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+  <div id="page-loader"><div class="loader-bike"></div></div>
+
+  <div class="admin-login-wrap">
+    <div class="auth-box card glass-strong">
+      <div class="text-center mb-3">
+        <img src="../assets/img/logo.jpg" alt="Ode Works" style="width:52px;height:52px;border-radius:14px;margin-inline:auto;margin-bottom:14px;">
+        <h2>Admin Portal</h2>
+        <p class="mt-1">Sign in to manage Ode Works.</p>
+      </div>
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" class="form-control" name="email" placeholder="admin@odeworks.ph" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" name="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          <span class="btn-label">Sign In</span>
+        </button>
+      </form>
+      <p class="form-hint text-center mt-3">Only admin and staff accounts can access this portal.</p>
+      <p class="text-center mt-2"><a href="../index.html" style="color:var(--color-accent);font-size:0.85rem;"><i class="fa-solid fa-arrow-left"></i> Back to main site</a></p>
+    </div>
+  </div>
+
+  <script type="module" src="../assets/js/admin/login.js"></script>
+  <script>
+    window.addEventListener('load', () => document.getElementById('page-loader')?.classList.add('hidden'));
+  </script>
+</body>
+</html>
