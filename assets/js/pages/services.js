@@ -14,7 +14,8 @@ function renderList(category) {
   const filtered = category === 'All' ? SERVICES : SERVICES.filter(s => s.category === category);
   listEl.innerHTML = filtered.map(s => `
     <div class="card pricing-row">
-      <div>
+      <img src="${s.photo}" alt="${s.name}" class="pricing-row-photo" loading="lazy">
+      <div class="pricing-row-info">
         <div class="name"><i class="${s.icon}" style="color:var(--color-accent);margin-right:10px;"></i>${s.name}</div>
         <div class="desc">${s.description}</div>
       </div>

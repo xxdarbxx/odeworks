@@ -28,7 +28,7 @@
 
   --gradient-accent: linear-gradient(135deg, #00e0ff 0%, #6366f1 100%);
   --gradient-accent-2: linear-gradient(135deg, #ff6a1a 0%, #ff4d4f 100%);
-  --gradient-hero: linear-gradient(180deg, rgba(8,8,11,0) 0%, rgba(8,8,11,0.85) 70%, #08080b 100%);
+  --gradient-hero: linear-gradient(180deg, rgba(8,8,11,0.1) 0%, rgba(8,8,11,0.5) 55%, rgba(8,8,11,0.88) 100%);
   --gradient-radial: radial-gradient(circle at 20% 20%, rgba(0,224,255,0.12), transparent 45%),
                       radial-gradient(circle at 80% 60%, rgba(255,106,26,0.1), transparent 45%);
 

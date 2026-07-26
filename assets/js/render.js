@@ -6,10 +6,13 @@ import { formatCurrency } from './utils.js';
 export function serviceCard(service) {
   return `
     <article class="card service-card" data-service-id="${service.id}">
-      <div class="icon-wrap"><i class="${service.icon}"></i></div>
-      <h4>${service.name}</h4>
-      <p class="mt-1">${service.shortDescription}</p>
-      <div class="price-tag">${formatCurrency(service.priceFrom)} <span>starting price</span></div>
+      <div class="service-card-photo"><img src="${service.photo}" alt="${service.name}" loading="lazy"></div>
+      <div class="service-card-body">
+        <div class="icon-wrap"><i class="${service.icon}"></i></div>
+        <h4>${service.name}</h4>
+        <p class="mt-1">${service.shortDescription}</p>
+        <div class="price-tag">${formatCurrency(service.priceFrom)} <span>starting price</span></div>
+      </div>
     </article>
   `;
 }
