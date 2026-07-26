@@ -10,16 +10,24 @@ Premium motorcycle dealership web app for **Ode Works** (Galas, Quezon City, Phi
 
 ## Folder Structure
 ```
-index.html, motorcycles.html, ... (customer pages, flat at project root)
-admin/                 admin dashboard pages
+index.html, motorcycles.html, ... (18 customer pages, flat at project root)
+admin/                 16 admin dashboard pages (login + dashboard + 14 modules)
 partials/              shared header/footer/admin-sidebar/admin-topbar HTML fragments
 assets/css/            main.css (tokens/reset), components.css, customer.css, admin.css
 assets/js/             config.js, supabase-client.js, auth.js, cart.js, wishlist.js,
                         toast.js, modal.js, nav.js, includes.js, utils.js, render.js
 assets/js/pages/        one script per customer page
-assets/js/admin/        admin CRUD engine + one script per admin module
+assets/js/admin/        admin-auth.js (guard), crud-table.js (generic CRUD engine),
+                        dashboard.js, reports.js, settings.js, and one script per module
 supabase/               schema.sql, rls_policies.sql, seed.sql
+serve.ps1               local static server for Windows (used by .claude/launch.json)
 ```
+
+### Admin modules
+Dashboard, Products, Motorcycle Inventory, Categories, Brands, Customers, Orders,
+Appointments, Mechanics, Blog, Promotions, CMS/Banners, Reports, Users, Settings.
+All list-based modules share one generic CRUD engine (`assets/js/admin/crud-table.js`):
+search, filters, pagination, create/edit modal, delete confirmation, toast feedback.
 
 ## 1. Set Up Supabase
 
@@ -72,8 +80,26 @@ No environment variables are required at build time — the Supabase URL/key are
 Checkout creates an **order record only** (no live payment gateway is integrated). Customers choose Cash on Delivery, Bank Transfer, or GCash and the order is stored with `payment_status = 'pending'`; staff confirm payment manually from the Admin → Orders module. To accept real online payments later, integrate a gateway (e.g. PayMongo, Stripe) using your own API keys in `checkout.js`.
 
 ## Build Status
-This project is being built in phases:
 - [x] Phase 1 — Foundation: DB schema, design system, shared JS modules, Home page, Login/Register
-- [ ] Phase 2 — Customer website (remaining pages)
-- [ ] Phase 3 — Admin dashboard
-- [ ] Phase 4 — Polish, responsive pass, deploy verification
+- [x] Phase 2 — Customer website: Motorcycles, Motorcycle Details, Parts, Product Details,
+      Compare, Services, Booking, Financing, About, Blog + Post, Contact, Profile, Wishlist,
+      Cart, Checkout
+- [x] Phase 3 — Admin dashboard: login/role guard, analytics dashboard with Chart.js, and
+      all 14 CRUD modules
+- [x] Phase 4 — Responsive pass verified (mobile nav + admin sidebar), all pages checked
+      for console errors in-browser
+
+## Known Limitations / Next Steps
+- **Supabase URL**: `assets/js/config.js` still has a placeholder Project URL — the app
+  will not actually read/write data until you fill it in (see Setup above). Until then,
+  every page falls back to graceful empty states rather than erroring.
+- **Contact form** does not persist messages (no `contact_messages` table was in the
+  original spec) — it shows a success toast only. Add a table + insert call if you want
+  submissions stored.
+- **Product/motorcycle images** are single-primary-image only from the admin forms
+  (a URL field). The `motorcycle_images` / `product_images` tables support multiple
+  images per item; extend the admin form UI if you want full gallery management there.
+- **Admin/staff accounts** are created by having the person register normally, then
+  promoting their role from the Users module (or via the SQL snippet above) — there is
+  no "invite user" flow, since creating auth users directly requires a service-role key
+  that should never live in client-side code.
