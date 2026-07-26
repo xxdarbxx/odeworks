@@ -1,11 +1,7 @@
 // ============================================================================
 // ODE WORKS - Navigation behavior: sticky header, mobile menu, active link,
-// cart/wishlist badges, auth-aware nav actions, back-to-top.
+// back-to-top.
 // ============================================================================
-import { getCurrentProfile } from './auth.js';
-import { getCartCount } from './cart.js';
-import { getWishlistCount } from './wishlist.js';
-import { initials } from './utils.js';
 
 function setActiveLink() {
   const current = window.location.pathname.split('/').pop() || 'index.html';
@@ -42,39 +38,11 @@ function initBackToTop() {
   btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
-async function updateBadges() {
-  const cartBadge = document.querySelector('[data-cart-count]');
-  const wishBadge = document.querySelector('[data-wishlist-count]');
-  const [cartCount, wishCount] = await Promise.all([getCartCount(), getWishlistCount()]);
-  if (cartBadge) { cartBadge.textContent = cartCount; cartBadge.style.display = cartCount ? 'flex' : 'none'; }
-  if (wishBadge) { wishBadge.textContent = wishCount; wishBadge.style.display = wishCount ? 'flex' : 'none'; }
-}
-
-async function updateAuthArea() {
-  const authArea = document.querySelector('[data-auth-area]');
-  if (!authArea) return;
-  const profile = await getCurrentProfile();
-  if (profile) {
-    authArea.innerHTML = `
-      <a href="profile.html" class="icon-btn" title="${profile.full_name}">
-        ${profile.avatar_url
-          ? `<img src="${profile.avatar_url}" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`
-          : `<span style="font-weight:700;font-size:0.8rem;">${initials(profile.full_name)}</span>`}
-      </a>`;
-  } else {
-    authArea.innerHTML = `<a href="login.html" class="icon-btn" title="Login"><i class="fa-regular fa-user"></i></a>`;
-  }
-}
-
 function initNav() {
   setActiveLink();
   initStickyHeader();
   initMobileToggle();
   initBackToTop();
-  updateBadges();
-  updateAuthArea();
-  document.addEventListener('cart:updated', updateBadges);
-  document.addEventListener('wishlist:updated', updateBadges);
 }
 
 if (document.querySelector('.site-header')) {

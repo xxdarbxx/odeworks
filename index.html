@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ode Works | Premium Motorcycle Dealership in Quezon City</title>
-  <meta name="description" content="Ode Works is a premium motorcycle dealership in Galas, Quezon City offering new motorcycles, genuine parts & accessories, expert servicing, and financing.">
+  <title>Ode Works | Motorcycle Repair & Maintenance in Quezon City</title>
+  <meta name="description" content="Ode Works is a certified motorcycle repair shop in Galas, Quezon City offering diagnostics, engine repair, maintenance, and servicing for all major brands.">
   <link rel="icon" href="assets/img/logo.jpg">
 
   <!-- Fonts -->
@@ -12,15 +12,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Swiper -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <!-- AOS -->
+  <!-- AOS scroll animations -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
 
   <!-- App styles -->
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/customer.css">
+  <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
 
@@ -29,13 +27,16 @@
   <div data-include="partials/header.html"></div>
 
   <main>
-    <!-- HERO SLIDESHOW -->
-    <section class="hero-slider">
-      <div class="swiper hero-swiper" style="height:100%;">
-        <div class="swiper-wrapper" id="hero-slides">
-          <!-- slides injected by home.js from `banners` table -->
+    <!-- HERO -->
+    <section class="hero" style="background-image:url('https://placehold.co/1920x1080/0d0d0d/00e0ff?text=Ode+Works+Repair+Shop');">
+      <div class="hero-content">
+        <span class="eyebrow">Certified Motorcycle Repair Shop</span>
+        <h1>Precision Repair. Honest Diagnostics. Fast Turnaround.</h1>
+        <p>From routine maintenance to full engine overhauls, our certified mechanics keep your motorcycle running the way it should — with transparent pricing and no surprises.</p>
+        <div class="hero-cta">
+          <a href="booking.html" class="btn btn-primary btn-lg">Book a Service</a>
+          <a href="services.html" class="btn btn-secondary btn-lg">View Services</a>
         </div>
-        <div class="swiper-pagination"></div>
       </div>
       <div class="hero-scroll-cue">
         <span>Scroll</span>
@@ -47,77 +48,77 @@
     <section class="container">
       <div class="stats-strip" data-aos="fade-up">
         <div class="stat-item"><div class="num">18+</div><div class="label">Years in Business</div></div>
-        <div class="stat-item"><div class="num">12,000+</div><div class="label">Happy Riders</div></div>
-        <div class="stat-item"><div class="num">6</div><div class="label">Trusted Brands</div></div>
-        <div class="stat-item"><div class="num">4.8<i class="fa-solid fa-star" style="font-size:1.1rem;"></i></div><div class="label">Average Rating</div></div>
+        <div class="stat-item"><div class="num">12,000+</div><div class="label">Motorcycles Serviced</div></div>
+        <div class="stat-item"><div class="num">4</div><div class="label">Certified Mechanics</div></div>
+        <div class="stat-item"><div class="num">4.9<i class="fa-solid fa-star" style="font-size:1.1rem;"></i></div><div class="label">Average Rating</div></div>
       </div>
     </section>
 
-    <!-- FEATURED MOTORCYCLES -->
+    <!-- SERVICES OVERVIEW -->
     <section class="section container">
       <div class="section-head row" data-aos="fade-up">
         <div>
-          <span class="eyebrow">New Arrivals</span>
-          <h2>Featured Motorcycles</h2>
+          <span class="eyebrow">What We Do</span>
+          <h2>Repair &amp; Maintenance Services</h2>
         </div>
-        <a href="motorcycles.html" class="btn btn-outline">View All Motorcycles <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="services.html" class="btn btn-outline">View All Services <i class="fa-solid fa-arrow-right"></i></a>
       </div>
-      <div class="product-grid" id="featured-motorcycles" data-aos="fade-up" data-aos-delay="100">
-        <!-- skeleton / cards injected by home.js -->
-      </div>
+      <div class="service-grid" id="home-services-grid" data-aos="fade-up" data-aos-delay="100"></div>
     </section>
 
-    <!-- CATEGORY BAND -->
+    <!-- HOW IT WORKS -->
     <section class="section" style="background:var(--color-bg-alt);">
       <div class="container">
-        <div class="section-head" data-aos="fade-up">
-          <span class="eyebrow">Shop by Category</span>
-          <h2>Find Your Ride Style</h2>
+        <div class="section-head text-center" style="align-items:center;" data-aos="fade-up">
+          <span class="eyebrow">How It Works</span>
+          <h2>Getting Your Bike Serviced Is Simple</h2>
         </div>
-        <div class="grid grid-4" data-aos="fade-up" data-aos-delay="100">
-          <a href="motorcycles.html?category=sport" class="card text-center" style="padding:32px 20px;">
-            <i class="fa-solid fa-gauge-high" style="font-size:2rem;color:var(--color-accent);margin-bottom:14px;"></i>
-            <h4>Sport</h4>
-          </a>
-          <a href="motorcycles.html?category=naked" class="card text-center" style="padding:32px 20px;">
-            <i class="fa-solid fa-bolt" style="font-size:2rem;color:var(--color-accent);margin-bottom:14px;"></i>
-            <h4>Naked</h4>
-          </a>
-          <a href="motorcycles.html?category=adventure" class="card text-center" style="padding:32px 20px;">
-            <i class="fa-solid fa-mountain-sun" style="font-size:2rem;color:var(--color-accent);margin-bottom:14px;"></i>
-            <h4>Adventure</h4>
-          </a>
-          <a href="motorcycles.html?category=cruiser" class="card text-center" style="padding:32px 20px;">
-            <i class="fa-solid fa-road" style="font-size:2rem;color:var(--color-accent);margin-bottom:14px;"></i>
-            <h4>Cruiser</h4>
-          </a>
+        <div class="process-steps" data-aos="fade-up" data-aos-delay="100">
+          <div class="card process-step">
+            <div class="step-num">1</div>
+            <h4>Book Online</h4>
+            <p class="mt-1">Choose a service, pick a date and time that works for you.</p>
+          </div>
+          <div class="card process-step">
+            <div class="step-num">2</div>
+            <h4>Drop Off &amp; Diagnose</h4>
+            <p class="mt-1">Bring your bike in — we inspect and confirm the scope of work with you first.</p>
+          </div>
+          <div class="card process-step">
+            <div class="step-num">3</div>
+            <h4>We Repair</h4>
+            <p class="mt-1">Certified mechanics complete the work using genuine or OEM-grade parts.</p>
+          </div>
+          <div class="card process-step">
+            <div class="step-num">4</div>
+            <h4>Ready for Pickup</h4>
+            <p class="mt-1">We test-run every bike before handoff and log the service to your history.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- FEATURED ACCESSORIES -->
+    <!-- GALLERY PREVIEW -->
     <section class="section container">
       <div class="section-head row" data-aos="fade-up">
         <div>
-          <span class="eyebrow">Gear Up</span>
-          <h2>Featured Parts &amp; Accessories</h2>
+          <span class="eyebrow">Our Work</span>
+          <h2>Before &amp; After</h2>
         </div>
-        <a href="parts.html" class="btn btn-outline">Shop All Gear <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="gallery.html" class="btn btn-outline">View Full Gallery <i class="fa-solid fa-arrow-right"></i></a>
       </div>
-      <div class="product-grid" id="featured-products" data-aos="fade-up" data-aos-delay="100">
-        <!-- skeleton / cards injected by home.js -->
-      </div>
+      <div class="gallery-grid" id="home-gallery-grid" data-aos="fade-up" data-aos-delay="100"></div>
     </section>
 
     <!-- SERVICE CTA -->
     <section class="container">
       <div class="cta-band glass" data-aos="zoom-in">
-        <span class="eyebrow">Certified Mechanics</span>
-        <h2 class="mt-2">Keep Your Ride in Peak Condition</h2>
-        <p class="mt-2" style="max-width:520px;margin-inline:auto;">Book a service appointment online in under a minute. Genuine parts, transparent pricing, fast turnaround.</p>
+        <span class="eyebrow">Ready When You Are</span>
+        <h2 class="mt-2">Book Your Motorcycle Service Today</h2>
+        <p class="mt-2" style="max-width:520px;margin-inline:auto;">Same-day turnaround for most routine services. Book online in under a minute.</p>
         <div class="hero-cta flex-center mt-3">
           <a href="booking.html" class="btn btn-primary btn-lg">Book Appointment</a>
-          <a href="services.html" class="btn btn-secondary btn-lg">View Services</a>
+          <a href="contact.html" class="btn btn-secondary btn-lg">Contact Us</a>
         </div>
       </div>
     </section>
@@ -128,23 +129,7 @@
         <span class="eyebrow">Customer Reviews</span>
         <h2>Riders Trust Ode Works</h2>
       </div>
-      <div class="grid grid-3" data-aos="fade-up" data-aos-delay="100">
-        <div class="card testimonial-card">
-          <div class="rating">★★★★★</div>
-          <p class="quote">"Bought my MT-09 here and the whole process was smooth. The team really knows their bikes."</p>
-          <div class="testimonial-author"><div class="avatar">JD</div><div><strong>Jomar D.</strong><div class="text-muted" style="font-size:0.8rem;">Quezon City</div></div></div>
-        </div>
-        <div class="card testimonial-card">
-          <div class="rating">★★★★★</div>
-          <p class="quote">"Best service center in the metro. Booked online, dropped off, done same day."</p>
-          <div class="testimonial-author"><div class="avatar">MR</div><div><strong>Maricel R.</strong><div class="text-muted" style="font-size:0.8rem;">Manila</div></div></div>
-        </div>
-        <div class="card testimonial-card">
-          <div class="rating">★★★★★</div>
-          <p class="quote">"Financing calculator on their site made it easy to plan my monthly budget before visiting."</p>
-          <div class="testimonial-author"><div class="avatar">AT</div><div><strong>Anton T.</strong><div class="text-muted" style="font-size:0.8rem;">Marikina</div></div></div>
-        </div>
-      </div>
+      <div class="grid grid-3" id="home-testimonials" data-aos="fade-up" data-aos-delay="100"></div>
     </section>
 
     <!-- BLOG PREVIEW -->
@@ -152,13 +137,11 @@
       <div class="section-head row" data-aos="fade-up">
         <div>
           <span class="eyebrow">From the Blog</span>
-          <h2>Riding Tips &amp; News</h2>
+          <h2>Maintenance Tips &amp; Shop News</h2>
         </div>
         <a href="blog.html" class="btn btn-outline">Read the Blog <i class="fa-solid fa-arrow-right"></i></a>
       </div>
-      <div class="grid grid-3" id="home-blog-preview" data-aos="fade-up" data-aos-delay="100">
-        <!-- injected by home.js -->
-      </div>
+      <div class="grid grid-3" id="home-blog-preview" data-aos="fade-up" data-aos-delay="100"></div>
     </section>
   </main>
 
@@ -167,7 +150,6 @@
   <script type="module" src="assets/js/includes.js"></script>
   <script type="module" src="assets/js/nav.js"></script>
   <script type="module" src="assets/js/pages/home.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 700, once: true, offset: 60 });

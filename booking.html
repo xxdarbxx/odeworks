@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book an Appointment | Ode Works</title>
-  <meta name="description" content="Book a motorcycle service appointment at Ode Works in Galas, Quezon City.">
+  <title>Book a Service | Ode Works</title>
+  <meta name="description" content="Book a motorcycle repair or maintenance appointment at Ode Works in Galas, Quezon City.">
   <link rel="icon" href="assets/img/logo.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/customer.css">
+  <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
 
@@ -21,7 +21,7 @@
   <main>
     <section class="section" style="padding-top:140px;">
       <div class="container" style="max-width:900px;">
-        <div class="breadcrumbs"><a href="index.html">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Book Appointment</span></div>
+        <div class="breadcrumbs"><a href="index.html">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Book a Service</span></div>
         <div class="section-head text-center" style="align-items:center;">
           <span class="eyebrow">Service Booking</span>
           <h1>Book Your Appointment</h1>
@@ -38,23 +38,13 @@
         <div class="booking-panel" data-step-panel="1">
           <div class="card glass" style="padding:28px;">
             <h3 class="mb-2">Select a Service</h3>
-            <div class="form-group">
-              <div class="select-wrap">
-                <select class="form-control" id="service-select">
-                  <option value="">Choose a service...</option>
-                  <option value="Periodic Maintenance">Periodic Maintenance</option>
-                  <option value="Engine Overhaul">Engine Overhaul</option>
-                  <option value="Electrical & ECU Tuning">Electrical &amp; ECU Tuning</option>
-                  <option value="Suspension & Handling">Suspension &amp; Handling</option>
-                  <option value="Tire Fitting & Balancing">Tire Fitting &amp; Balancing</option>
-                  <option value="Detailing & Paint Care">Detailing &amp; Paint Care</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
+            <div class="service-select-grid" id="service-select-grid"></div>
+
+            <div class="form-group mt-3">
               <label>Motorcycle Details</label>
               <input type="text" class="form-control" id="moto-info-input" placeholder="e.g. Yamaha MT-09, 2025, Plate ABC123">
             </div>
+
             <h3 class="mb-2 mt-3">Preferred Mechanic (optional)</h3>
             <div class="grid grid-4" id="mechanic-select-grid"></div>
             <div class="flex" style="justify-content:flex-end;"><button class="btn btn-primary btn-lg mt-3" id="step1-next">Continue <i class="fa-solid fa-arrow-right"></i></button></div>
@@ -101,7 +91,20 @@
           <div class="card glass" style="padding:28px;" id="booking-summary"></div>
           <div class="flex-between mt-3">
             <button class="btn btn-secondary" id="step4-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
-            <button class="btn btn-primary btn-lg" id="confirm-booking-btn">Confirm Appointment</button>
+            <button class="btn btn-primary btn-lg" id="confirm-booking-btn">
+              <span class="btn-label">Confirm Appointment</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SUCCESS STATE -->
+        <div class="booking-panel text-center" data-step-panel="success" style="display:none;">
+          <div class="card glass" style="padding:48px 28px;">
+            <i class="fa-solid fa-circle-check" style="font-size:3rem;color:var(--color-success);"></i>
+            <h2 class="mt-3">Appointment Booked!</h2>
+            <p class="mt-2">Reference number: <strong id="success-booking-id"></strong></p>
+            <p class="mt-1">We'll send a confirmation to your email/phone. See you soon!</p>
+            <a href="index.html" class="btn btn-primary btn-lg mt-3">Back to Home</a>
           </div>
         </div>
       </div>

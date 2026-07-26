@@ -1,25 +1,37 @@
 // ============================================================================
-// ODE WORKS - Services page: mechanics list
+// ODE WORKS - Services page: filterable pricing list
 // ============================================================================
-import { supabase } from '../supabase-client.js';
+import { SERVICES } from '../data.js';
+import { formatCurrency } from '../utils.js';
 
-async function loadMechanics() {
-  const grid = document.getElementById('mechanics-grid');
-  const { data, error } = await supabase.from('mechanics').select('*').eq('is_active', true).order('years_experience', { ascending: false });
+const listEl = document.getElementById('services-list');
+const filterEl = document.getElementById('category-filter');
+const categories = ['All', ...new Set(SERVICES.map(s => s.category))];
 
-  if (error || !data || !data.length) {
-    grid.innerHTML = '<p class="text-muted">Mechanic profiles will appear here once connected to Supabase.</p>';
-    return;
-  }
+filterEl.innerHTML = categories.map((c, i) => `<button class="filter-pill ${i === 0 ? 'active' : ''}" data-cat="${c}">${c}</button>`).join('');
 
-  grid.innerHTML = data.map(m => `
-    <div class="card mechanic-card">
-      <img src="${m.photo_url}" alt="${m.full_name}">
-      <h4>${m.full_name}</h4>
-      <p class="text-muted" style="font-size:0.85rem;">${m.specialty || ''}</p>
-      <p class="mt-1" style="font-size:0.8rem;">${m.years_experience} years experience</p>
+function renderList(category) {
+  const filtered = category === 'All' ? SERVICES : SERVICES.filter(s => s.category === category);
+  listEl.innerHTML = filtered.map(s => `
+    <div class="card pricing-row">
+      <div>
+        <div class="name"><i class="${s.icon}" style="color:var(--color-accent);margin-right:10px;"></i>${s.name}</div>
+        <div class="desc">${s.description}</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;">
+        <div class="price">${formatCurrency(s.priceFrom)}</div>
+        <a href="booking.html?service=${s.slug}" class="btn btn-outline btn-sm mt-1">Book</a>
+      </div>
     </div>
   `).join('');
 }
 
-loadMechanics();
+filterEl.querySelectorAll('.filter-pill').forEach((pill) => {
+  pill.addEventListener('click', () => {
+    filterEl.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    renderList(pill.dataset.cat);
+  });
+});
+
+renderList('All');

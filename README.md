@@ -1,105 +1,71 @@
-# Ode Works — Motorcycle Shop Web App
+# Ode Works — Motorcycle Repair Shop Website
 
-Premium motorcycle dealership web app for **Ode Works** (Galas, Quezon City, Philippines). Vanilla HTML/CSS/ES6 JavaScript customer site + admin dashboard, backed by Supabase (Auth, Postgres, Storage), deploy-ready for Vercel.
+A modern, premium, responsive website for **Ode Works**, a motorcycle repair, maintenance, and diagnostics shop in Galas, Quezon City, Philippines. Built with plain HTML5, CSS3, and vanilla JavaScript — no frameworks, no build step, and no required backend to run it.
 
 ## Tech Stack
-- HTML5 / CSS3 / Vanilla JavaScript (ES modules, no frontend framework)
-- [Supabase](https://supabase.com) — Auth, Postgres database, Row Level Security
-- [Swiper.js](https://swiperjs.com) (hero slideshow), [AOS](https://michalsnik.github.io/aos/) (scroll animations), [Chart.js](https://www.chartjs.org) (admin analytics), [Font Awesome](https://fontawesome.com) (icons) — all loaded via CDN
-- Deploy target: [Vercel](https://vercel.com) (static hosting, no build step required)
+- HTML5 / CSS3 / Vanilla JavaScript (ES modules)
+- [AOS](https://michalsnik.github.io/aos/) (scroll animations) and [Font Awesome](https://fontawesome.com) (icons) — loaded via CDN
+- Deploy target: [Vercel](https://vercel.com) (static hosting, no build command needed)
+- **Database-ready, not database-required**: content and form submissions are handled by a small local data/API layer today (see below), written so a real backend (Supabase or anything else) can be dropped in later without touching any page's HTML.
 
 ## Folder Structure
 ```
-index.html, motorcycles.html, ... (18 customer pages, flat at project root)
-admin/                 16 admin dashboard pages (login + dashboard + 14 modules)
-partials/              shared header/footer/admin-sidebar/admin-topbar HTML fragments
-assets/css/            main.css (tokens/reset), components.css, customer.css, admin.css
-assets/js/             config.js, supabase-client.js, auth.js, cart.js, wishlist.js,
-                        toast.js, modal.js, nav.js, includes.js, utils.js, render.js
-assets/js/pages/        one script per customer page
-assets/js/admin/        admin-auth.js (guard), crud-table.js (generic CRUD engine),
-                        dashboard.js, reports.js, settings.js, and one script per module
-supabase/               schema.sql, rls_policies.sql, seed.sql
-serve.ps1               local static server for Windows (used by .claude/launch.json)
+index.html, about.html, services.html, gallery.html,
+booking.html, blog.html, blog-post.html, contact.html, 404.html
+
+partials/          header.html, footer.html (shared, injected via includes.js)
+
+assets/css/        main.css        design tokens, reset, glassmorphism base
+                    components.css  buttons, cards, badges, forms, toasts, modal, nav
+                    site.css        page-specific styles (hero, services, gallery, booking, etc.)
+
+assets/js/         includes.js     fetches and injects header/footer partials
+                    nav.js          sticky header, mobile menu, back-to-top
+                    toast.js        toast notifications
+                    modal.js        modal/confirm dialog helper
+                    utils.js        formatting/date/debounce helpers
+                    render.js       shared card renderers (service/gallery/testimonial/blog/mechanic)
+                    data.js         sample content — services, mechanics, testimonials, gallery, blog posts
+                    api.js          submitBooking() / submitContactMessage() / getBookedSlots()
+                                    — localStorage-backed today, swap for a real DB call later
+
+assets/js/pages/    one script per page (home.js, about.js, services.js, gallery.js,
+                    booking.js, blog.js, blog-post.js, contact.js)
+
+assets/img/        logo.jpg
+
+supabase/schema.sql  optional future schema — table shapes mirror data.js/api.js
+                      exactly, so wiring up a real backend later is a drop-in swap
+
+vercel.json, serve.ps1, .gitignore
 ```
 
-### Admin modules
-Dashboard, Products, Motorcycle Inventory, Categories, Brands, Customers, Orders,
-Appointments, Mechanics, Blog, Promotions, CMS/Banners, Reports, Users, Settings.
-All list-based modules share one generic CRUD engine (`assets/js/admin/crud-table.js`):
-search, filters, pagination, create/edit modal, delete confirmation, toast feedback.
+## How content works right now
+Every page reads its content from **`assets/js/data.js`** — plain JS arrays of objects shaped like database rows (each with an `id`). There's nothing to configure or connect; edit that file directly to change services, team members, testimonials, gallery items, or blog posts.
 
-## 1. Set Up Supabase
+Two things that involve user input — the **booking wizard** and the **contact form** — go through **`assets/js/api.js`**, which currently just validates, simulates a short delay, and saves to `localStorage` so the flow feels real end-to-end (you can inspect `ow_bookings` / `ow_contact_messages` in DevTools → Application → Local Storage).
 
-1. Create/open your project at [supabase.com](https://supabase.com/dashboard).
-2. Go to **SQL Editor** and run, **in this exact order**:
-   1. `supabase/schema.sql` — tables, types, indexes, triggers
-   2. `supabase/rls_policies.sql` — Row Level Security policies
-   3. `supabase/seed.sql` — sample brands, motorcycles, products, mechanics, blog posts, banners, promotions, settings
-3. Go to **Settings → API** and copy:
-   - **Project URL**
-   - **anon / publishable key**
-4. Open [assets/js/config.js](assets/js/config.js) and replace:
-   ```js
-   export const SUPABASE_URL = 'https://TODO-YOUR-PROJECT-REF.supabase.co';
-   ```
-   with your real Project URL. The anon key has already been filled in for you.
+## Adding a real backend later (optional)
+When you're ready to persist data for real:
+1. Run `supabase/schema.sql` in your Supabase project's SQL Editor — its tables (`services`, `mechanics`, `appointments`, `testimonials`, `gallery_images`, `blog_posts`, `contact_messages`) mirror `data.js`/`api.js` field-for-field.
+2. Add a Supabase client (`npm i @supabase/supabase-js` or the `esm.sh` CDN import used in earlier iterations of this project) and replace the bodies of `submitBooking()` / `submitContactMessage()` in `assets/js/api.js` with `supabase.from(...).insert(...)` calls — the function signatures stay the same, so no page-level code needs to change.
+3. Swap the static arrays in `data.js` for `supabase.from('services').select('*')`-style calls (or keep `data.js` as a fallback while the DB is being populated).
 
-### Creating your first admin account
-Sign up normally through the site's **Register** form (this auto-creates a `profiles` row with `role = 'customer'` via the `handle_new_user` trigger). Then, in the Supabase SQL Editor, promote that account:
-```sql
-update profiles set role = 'admin' where email = 'you@example.com';
-```
-You can then log in at `admin/login.html`.
-
-### Storage (product/motorcycle images)
-The seed data uses placeholder image URLs (`placehold.co`) so the site works immediately. To use real photos: create a public Storage bucket (e.g. `media`) in Supabase, upload images, and swap the URLs in `motorcycle_images` / `product_images` (or manage them from the Admin → Products / Inventory modules once built).
-
-## 2. Run Locally
-
-Because pages use ES modules (`fetch()` for header/footer partials, dynamic `import()`), you must serve the folder over HTTP — opening the HTML files directly (`file://`) will not work. From this folder, run any static server, e.g.:
+## Run Locally
+Because pages use ES modules (`fetch()` for header/footer partials, dynamic imports), serve the folder over HTTP — opening the HTML files directly (`file://`) will not work correctly. From this folder:
 ```bash
 npx serve .
 ```
-or the Python one-liner:
+or:
 ```bash
 python -m http.server 5500
 ```
-Then visit `http://localhost:5500`.
+Then visit `http://localhost:5500`. (A Windows PowerShell static server, `serve.ps1`, is also included and wired up in `.claude/launch.json` for local preview.)
 
-## 3. Deploy to Vercel
-
+## Deploy to Vercel
 1. Push this folder to your GitHub repo (`https://github.com/xxdarbxx/odeworks`).
 2. In Vercel, **Import Project** from that repo.
-3. Framework preset: **Other** (static site, no build command, no output directory override needed).
+3. Framework preset: **Other** (static site — no build command, no output directory override).
 4. Deploy. `vercel.json` sets long-term caching for `/assets`.
 
-No environment variables are required at build time — the Supabase URL/key are public (anon key) and live in `assets/js/config.js`, protected by Row Level Security on every table.
-
-## Checkout / Payments
-Checkout creates an **order record only** (no live payment gateway is integrated). Customers choose Cash on Delivery, Bank Transfer, or GCash and the order is stored with `payment_status = 'pending'`; staff confirm payment manually from the Admin → Orders module. To accept real online payments later, integrate a gateway (e.g. PayMongo, Stripe) using your own API keys in `checkout.js`.
-
-## Build Status
-- [x] Phase 1 — Foundation: DB schema, design system, shared JS modules, Home page, Login/Register
-- [x] Phase 2 — Customer website: Motorcycles, Motorcycle Details, Parts, Product Details,
-      Compare, Services, Booking, Financing, About, Blog + Post, Contact, Profile, Wishlist,
-      Cart, Checkout
-- [x] Phase 3 — Admin dashboard: login/role guard, analytics dashboard with Chart.js, and
-      all 14 CRUD modules
-- [x] Phase 4 — Responsive pass verified (mobile nav + admin sidebar), all pages checked
-      for console errors in-browser
-
-## Known Limitations / Next Steps
-- **Supabase URL**: `assets/js/config.js` still has a placeholder Project URL — the app
-  will not actually read/write data until you fill it in (see Setup above). Until then,
-  every page falls back to graceful empty states rather than erroring.
-- **Contact form** does not persist messages (no `contact_messages` table was in the
-  original spec) — it shows a success toast only. Add a table + insert call if you want
-  submissions stored.
-- **Product/motorcycle images** are single-primary-image only from the admin forms
-  (a URL field). The `motorcycle_images` / `product_images` tables support multiple
-  images per item; extend the admin form UI if you want full gallery management there.
-- **Admin/staff accounts** are created by having the person register normally, then
-  promoting their role from the Users module (or via the SQL snippet above) — there is
-  no "invite user" flow, since creating auth users directly requires a service-role key
-  that should never live in client-side code.
+No environment variables or secrets are required — there is no backend dependency in this build.

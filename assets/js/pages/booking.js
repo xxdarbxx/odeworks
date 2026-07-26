@@ -1,20 +1,21 @@
 // ============================================================================
 // ODE WORKS - Appointment booking (multi-step wizard)
+// Persists through assets/js/api.js (localStorage today, swappable for a real
+// backend later — see the comment at the top of that file).
 // ============================================================================
-import { supabase } from '../supabase-client.js';
-import { getCurrentUser, getCurrentProfile } from '../auth.js';
-import { toastSuccess, toastError } from '../toast.js';
-import { formatDate } from '../utils.js';
+import { SERVICES, MECHANICS } from '../data.js';
+import { submitBooking, getBookedSlots } from '../api.js';
+import { toastError } from '../toast.js';
+import { formatDate, getQueryParam } from '../utils.js';
 
 const TIME_SLOTS = ['09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
 
-const state = { step: 1, service: '', motoInfo: '', mechanicId: null, mechanicName: 'No preference', date: null, time: null };
+const state = { step: 1, serviceId: '', serviceName: '', motoInfo: '', mechanicId: null, mechanicName: 'No preference', date: null, time: null };
 let calendarViewDate = new Date();
-let mechanics = [];
 
 function goToStep(step) {
   state.step = step;
-  document.querySelectorAll('.booking-panel').forEach(p => p.style.display = Number(p.dataset.stepPanel) === step ? 'block' : 'none');
+  document.querySelectorAll('.booking-panel').forEach(p => p.style.display = p.dataset.stepPanel === String(step) ? 'block' : 'none');
   document.querySelectorAll('.booking-step').forEach(s => {
     const n = Number(s.dataset.step);
     s.classList.toggle('active', n === step);
@@ -23,20 +24,39 @@ function goToStep(step) {
   if (step === 4) renderSummary();
 }
 
-async function loadMechanics() {
-  const { data } = await supabase.from('mechanics').select('*').eq('is_active', true);
-  mechanics = data || [];
+function renderServiceGrid() {
+  const grid = document.getElementById('service-select-grid');
+  const preselect = getQueryParam('service');
+  grid.innerHTML = SERVICES.map(s => `
+    <div class="service-select-card ${s.slug === preselect ? 'selected' : ''}" data-id="${s.id}" data-name="${s.name}">
+      <i class="${s.icon}"></i>
+      <div style="font-weight:600;font-size:0.9rem;">${s.name}</div>
+    </div>
+  `).join('');
+  if (preselect) {
+    const match = SERVICES.find(s => s.slug === preselect);
+    if (match) { state.serviceId = match.id; state.serviceName = match.name; }
+  }
+  grid.querySelectorAll('.service-select-card').forEach(card => card.addEventListener('click', () => {
+    grid.querySelectorAll('.service-select-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    state.serviceId = card.dataset.id;
+    state.serviceName = card.dataset.name;
+  }));
+}
+
+function renderMechanicGrid() {
   const grid = document.getElementById('mechanic-select-grid');
   grid.innerHTML = `
-    <div class="card mechanic-card mechanic-option selected" data-id="" data-name="No preference" style="cursor:pointer;">
+    <div class="card mechanic-card mechanic-option selected" data-id="" data-name="No preference">
       <div class="icon-wrap flex-center" style="margin-inline:auto;border-radius:50%;"><i class="fa-solid fa-user-group"></i></div>
       <h4 style="font-size:0.9rem;">No preference</h4>
     </div>
-    ${mechanics.map(m => `
-      <div class="card mechanic-card mechanic-option" data-id="${m.id}" data-name="${m.full_name}" style="cursor:pointer;">
-        <img src="${m.photo_url}" alt="${m.full_name}">
-        <h4 style="font-size:0.9rem;">${m.full_name}</h4>
-        <p class="text-muted" style="font-size:0.78rem;">${m.specialty || ''}</p>
+    ${MECHANICS.map(m => `
+      <div class="card mechanic-card mechanic-option" data-id="${m.id}" data-name="${m.name}">
+        <img src="${m.photo}" alt="${m.name}">
+        <h4 style="font-size:0.9rem;">${m.name}</h4>
+        <p class="text-muted" style="font-size:0.78rem;">${m.specialty}</p>
       </div>
     `).join('')}
   `;
@@ -49,9 +69,8 @@ async function loadMechanics() {
 }
 
 document.getElementById('step1-next').addEventListener('click', () => {
-  state.service = document.getElementById('service-select').value;
   state.motoInfo = document.getElementById('moto-info-input').value.trim();
-  if (!state.service) { toastError('Please select a service type.'); return; }
+  if (!state.serviceId) { toastError('Please select a service type.'); return; }
   goToStep(2);
   renderCalendar();
 });
@@ -98,10 +117,7 @@ async function renderTimeSlots() {
   container.innerHTML = '<div class="spinner"></div>';
 
   const dateStr = state.date.toISOString().slice(0, 10);
-  let query = supabase.from('appointments').select('appointment_time').eq('appointment_date', dateStr).neq('status', 'cancelled');
-  if (state.mechanicId) query = query.eq('mechanic_id', state.mechanicId);
-  const { data } = await query;
-  const booked = new Set((data || []).map(r => r.appointment_time.slice(0,5)));
+  const booked = new Set(await getBookedSlots(dateStr));
 
   container.innerHTML = TIME_SLOTS.map(t => `
     <div class="time-slot ${booked.has(t) ? 'disabled' : ''} ${state.time === t ? 'selected' : ''}" data-time="${t}">${formatTime(t)}</div>
@@ -125,14 +141,8 @@ document.getElementById('cal-prev').addEventListener('click', () => { calendarVi
 document.getElementById('cal-next').addEventListener('click', () => { calendarViewDate.setMonth(calendarViewDate.getMonth() + 1); renderCalendar(); });
 
 document.getElementById('step2-back').addEventListener('click', () => goToStep(1));
-document.getElementById('step2-next').addEventListener('click', async () => {
+document.getElementById('step2-next').addEventListener('click', () => {
   if (!state.date || !state.time) { toastError('Please select a date and time.'); return; }
-  const profile = await getCurrentProfile();
-  if (profile) {
-    document.getElementById('contact-name').value = profile.full_name || '';
-    document.getElementById('contact-phone').value = profile.phone || '';
-    document.getElementById('contact-email').value = profile.email || '';
-  }
   goToStep(3);
 });
 
@@ -150,51 +160,50 @@ document.getElementById('step4-back').addEventListener('click', () => goToStep(3
 function renderSummary() {
   document.getElementById('booking-summary').innerHTML = `
     <h3 class="mb-3">Review Your Appointment</h3>
-    <div class="summary-row"><span>Service</span><strong>${state.service}</strong></div>
-    <div class="summary-row"><span>Motorcycle</span><strong>${state.motoInfo || '—'}</strong></div>
-    <div class="summary-row"><span>Mechanic</span><strong>${state.mechanicName}</strong></div>
-    <div class="summary-row"><span>Date</span><strong>${formatDate(state.date)}</strong></div>
-    <div class="summary-row"><span>Time</span><strong>${formatTime(state.time)}</strong></div>
+    <div class="booking-summary-row"><span>Service</span><strong>${state.serviceName}</strong></div>
+    <div class="booking-summary-row"><span>Motorcycle</span><strong>${state.motoInfo || '—'}</strong></div>
+    <div class="booking-summary-row"><span>Mechanic</span><strong>${state.mechanicName}</strong></div>
+    <div class="booking-summary-row"><span>Date</span><strong>${formatDate(state.date)}</strong></div>
+    <div class="booking-summary-row"><span>Time</span><strong>${formatTime(state.time)}</strong></div>
     <hr class="divider">
-    <div class="summary-row"><span>Name</span><strong>${document.getElementById('contact-name').value}</strong></div>
-    <div class="summary-row"><span>Phone</span><strong>${document.getElementById('contact-phone').value}</strong></div>
-    <div class="summary-row"><span>Email</span><strong>${document.getElementById('contact-email').value}</strong></div>
+    <div class="booking-summary-row"><span>Name</span><strong>${document.getElementById('contact-name').value}</strong></div>
+    <div class="booking-summary-row"><span>Phone</span><strong>${document.getElementById('contact-phone').value}</strong></div>
+    <div class="booking-summary-row"><span>Email</span><strong>${document.getElementById('contact-email').value}</strong></div>
   `;
 }
 
 document.getElementById('confirm-booking-btn').addEventListener('click', async () => {
-  const user = await getCurrentUser();
-  if (!user) {
-    sessionStorage.setItem('ow_pending_booking', JSON.stringify({ ...state, date: state.date?.toISOString() }));
-    toastError('Please log in to confirm your appointment.', 'Login required');
-    window.location.href = 'login.html?redirect=%2Fbooking.html';
-    return;
-  }
-
   const btn = document.getElementById('confirm-booking-btn');
+  const label = btn.querySelector('.btn-label');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Booking...';
+  label.innerHTML = '<span class="spinner"></span>';
 
-  const { error } = await supabase.from('appointments').insert({
-    user_id: user.id,
-    mechanic_id: state.mechanicId,
-    service_type: state.service,
-    motorcycle_info: state.motoInfo,
-    appointment_date: state.date.toISOString().slice(0, 10),
-    appointment_time: state.time,
+  const result = await submitBooking({
+    serviceId: state.serviceId,
+    serviceName: state.serviceName,
+    mechanicId: state.mechanicId,
+    mechanicName: state.mechanicName,
+    date: state.date.toISOString().slice(0, 10),
+    time: state.time,
+    motorcycleInfo: state.motoInfo,
+    name: document.getElementById('contact-name').value.trim(),
+    phone: document.getElementById('contact-phone').value.trim(),
+    email: document.getElementById('contact-email').value.trim(),
     notes: document.getElementById('contact-notes').value.trim()
   });
 
-  if (error) {
-    toastError(error.message, 'Booking failed');
-    btn.disabled = false;
-    btn.textContent = 'Confirm Appointment';
-    return;
-  }
+  btn.disabled = false;
+  label.textContent = 'Confirm Appointment';
 
-  toastSuccess('Your appointment has been booked. We\'ll see you soon!', 'Appointment Confirmed');
-  setTimeout(() => window.location.href = 'profile.html', 1200);
+  if (!result.success) { toastError('Something went wrong. Please try again.', 'Booking failed'); return; }
+
+  document.getElementById('success-booking-id').textContent = result.id;
+  document.querySelectorAll('.booking-panel').forEach(p => p.style.display = 'none');
+  document.querySelector('[data-step-panel="success"]').style.display = 'block';
+  document.querySelector('.booking-steps').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-loadMechanics();
+renderServiceGrid();
+renderMechanicGrid();
 goToStep(1);
