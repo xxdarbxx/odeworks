@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ode Works | Premium Motorcycle Dealership in Quezon City</title>
+  <meta name="description" content="Ode Works is a premium motorcycle dealership in Galas, Quezon City offering new motorcycles, genuine parts & accessories, expert servicing, and financing.">
+  <link rel="icon" href="assets/img/logo.jpg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/customer.css">
+</head>
+<body>
+
+  <div id="page-loader"><div class="loader-bike"></div></div>
+
+  <div data-include="partials/header.html"></div>
+
+  <main>
+    <!-- HERO SLIDESHOW -->
+    <section class="hero-slider">
+      <div class="swiper hero-swiper" style="height:100%;">
+        <div class="swiper-wrapper" id="hero-slides">
+          <!-- slides injected by home.js from `banners` table -->
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+      <div class="hero-scroll-cue">
+        <span>Scroll</span>
+        <div class="line"></div>
+      </div>
+    </section>
+
+    <!-- STATS STRIP -->
+    <section class="container">
+      <div class="stats-strip" data-aos="fade-up">
+        <div class="stat-item"><div class="num">18+</div><div class="label">Years in Business</div></div>
+        <div class="stat-item"><div class="num">12,000+</div><div class="label">Happy Riders</div></div>
+        <div class="stat-item"><div class="num">6</div><div class="label">Trusted Brands</div></div>
+        <div class="stat-item"><div class="num">4.8<i class="fa-solid fa-star" style="font-size:1.1rem;"></i></div><div class="label">Average Rating</div></div>
+      </div>
+    </section>
+
+    <!-- FEATURED MOTORCYCLES -->
+    <section class="section container">
+      <div class="section-head row" data-aos="fade-up">
+        <div>
+          <span class="eyebrow">New Arrivals</span>
+          <h2>Featured Motorcycles</h2>
+        </div>
+        <a href="motorcycles.html" class="btn btn-outline">View All Motorcycles <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="product-grid" id="featured-motorcycles" data-aos="fade-up" data-aos-delay="100">
+        <!-- skeleton / cards injected by home.js -->
+      </div>
+    </section>
+
+    <!-- CATEGORY BAND -->
+    <section class="section" style="background:var(--color-bg-alt);">
+      <div class="container">
+        <div class="section-head" data-aos="fade-up">
+          <span class="eyebrow">Shop by Category</span>
+          <h2>Find Your Ride Style</h2>
+        </div>
+        <div class="grid grid-4" data-aos="fade-up" data-aos-delay="100">
+          <a href="motorcycles.html?category=sport" class="card text-center" style="padding:32px 20px;">
+            <i class="fa-solid fa-gauge-high" style="font-size:2rem;color:var(--color-accent);margin-bottom:14px;"></i>
+            <h4>Sport</h4>
+          </a>
+          <a href="motorcycles.html?category=naked" class="card text-center" style="padding:32px 20px;">
+            <i class="fa-solid fa-bolt" style="font-size:2rem;color:var(--color-accent);margin-bottom:14px;"></i>
+            <h4>Naked</h4>
+          </a>
+          <a href="motorcycles.html?category=adventure" class="card text-center" style="padding:32px 20px;">
+            <i class="fa-solid fa-mountain-sun" style="font-size:2rem;color:var(--color-accent);margin-bottom:14px;"></i>
+            <h4>Adventure</h4>
+          </a>
+          <a href="motorcycles.html?category=cruiser" class="card text-center" style="padding:32px 20px;">
+            <i class="fa-solid fa-road" style="font-size:2rem;color:var(--color-accent);margin-bottom:14px;"></i>
+            <h4>Cruiser</h4>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED ACCESSORIES -->
+    <section class="section container">
+      <div class="section-head row" data-aos="fade-up">
+        <div>
+          <span class="eyebrow">Gear Up</span>
+          <h2>Featured Parts &amp; Accessories</h2>
+        </div>
+        <a href="parts.html" class="btn btn-outline">Shop All Gear <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="product-grid" id="featured-products" data-aos="fade-up" data-aos-delay="100">
+        <!-- skeleton / cards injected by home.js -->
+      </div>
+    </section>
+
+    <!-- SERVICE CTA -->
+    <section class="container">
+      <div class="cta-band glass" data-aos="zoom-in">
+        <span class="eyebrow">Certified Mechanics</span>
+        <h2 class="mt-2">Keep Your Ride in Peak Condition</h2>
+        <p class="mt-2" style="max-width:520px;margin-inline:auto;">Book a service appointment online in under a minute. Genuine parts, transparent pricing, fast turnaround.</p>
+        <div class="hero-cta flex-center mt-3">
+          <a href="booking.html" class="btn btn-primary btn-lg">Book Appointment</a>
+          <a href="services.html" class="btn btn-secondary btn-lg">View Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section container">
+      <div class="section-head" data-aos="fade-up">
+        <span class="eyebrow">Customer Reviews</span>
+        <h2>Riders Trust Ode Works</h2>
+      </div>
+      <div class="grid grid-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="card testimonial-card">
+          <div class="rating">★★★★★</div>
+          <p class="quote">"Bought my MT-09 here and the whole process was smooth. The team really knows their bikes."</p>
+          <div class="testimonial-author"><div class="avatar">JD</div><div><strong>Jomar D.</strong><div class="text-muted" style="font-size:0.8rem;">Quezon City</div></div></div>
+        </div>
+        <div class="card testimonial-card">
+          <div class="rating">★★★★★</div>
+          <p class="quote">"Best service center in the metro. Booked online, dropped off, done same day."</p>
+          <div class="testimonial-author"><div class="avatar">MR</div><div><strong>Maricel R.</strong><div class="text-muted" style="font-size:0.8rem;">Manila</div></div></div>
+        </div>
+        <div class="card testimonial-card">
+          <div class="rating">★★★★★</div>
+          <p class="quote">"Financing calculator on their site made it easy to plan my monthly budget before visiting."</p>
+          <div class="testimonial-author"><div class="avatar">AT</div><div><strong>Anton T.</strong><div class="text-muted" style="font-size:0.8rem;">Marikina</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG PREVIEW -->
+    <section class="section container">
+      <div class="section-head row" data-aos="fade-up">
+        <div>
+          <span class="eyebrow">From the Blog</span>
+          <h2>Riding Tips &amp; News</h2>
+        </div>
+        <a href="blog.html" class="btn btn-outline">Read the Blog <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="grid grid-3" id="home-blog-preview" data-aos="fade-up" data-aos-delay="100">
+        <!-- injected by home.js -->
+      </div>
+    </section>
+  </main>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script type="module" src="assets/js/includes.js"></script>
+  <script type="module" src="assets/js/nav.js"></script>
+  <script type="module" src="assets/js/pages/home.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 700, once: true, offset: 60 });
+    window.addEventListener('load', () => {
+      document.getElementById('page-loader')?.classList.add('hidden');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="index.html" class="brand mb-2" style="display:inline-flex;">
+          <img src="assets/img/logo.jpg" alt="Ode Works logo">
+          <span>Ode Works</span>
+        </a>
+        <p>Premium motorcycles, genuine parts, and expert service in the heart of Quezon City.</p>
+        <div class="social-row">
+          <a href="https://facebook.com/odeworks" target="_blank" rel="noopener" class="icon-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://instagram.com/odeworks" target="_blank" rel="noopener" class="icon-btn"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://tiktok.com/@odeworks" target="_blank" rel="noopener" class="icon-btn"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="https://youtube.com/@odeworks" target="_blank" rel="noopener" class="icon-btn"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="motorcycles.html">Motorcycles</a>
+        <a href="parts.html">Parts &amp; Accessories</a>
+        <a href="compare.html">Compare Motorcycles</a>
+        <a href="wishlist.html">Wishlist</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Services</a>
+        <a href="booking.html">Book Appointment</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Stay in the loop</h4>
+        <p>Get new arrivals, promos, and riding tips straight to your inbox.</p>
+        <form class="newsletter-box" data-newsletter-form>
+          <input type="email" class="form-control" placeholder="Your email" required>
+          <button type="submit" class="btn btn-primary btn-sm">Join</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; <span id="footer-year"></span> Ode Works. All rights reserved.</span>
+      <span>Galas, Quezon City, Philippines</span>
+    </div>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script>
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+  document.querySelector('[data-newsletter-form]')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    import('./assets/js/toast.js').then(({ toastSuccess }) => toastSuccess('Thanks for subscribing! Watch your inbox for updates.', 'Subscribed'));
+    e.target.reset();
+  });
+</script>

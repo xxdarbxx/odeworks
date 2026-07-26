@@ -1,0 +1,187 @@
+/* ============================================================================
+   ODE WORKS - Design Tokens, Reset & Base Typography
+   ============================================================================ */
+
+:root {
+  /* Brand palette - dark premium dealership theme */
+  --color-bg: #08080b;
+  --color-bg-alt: #0f0f14;
+  --color-surface: #14141b;
+  --color-surface-2: #1a1a23;
+  --color-glass: rgba(255, 255, 255, 0.045);
+  --color-glass-strong: rgba(255, 255, 255, 0.08);
+  --color-border: rgba(255, 255, 255, 0.09);
+  --color-border-strong: rgba(255, 255, 255, 0.16);
+
+  --color-accent: #00e0ff;
+  --color-accent-dim: #00b3cc;
+  --color-accent-2: #ff6a1a;
+  --color-accent-2-dim: #cc5514;
+  --color-success: #2ecc71;
+  --color-warning: #f5a623;
+  --color-danger: #ff4d4f;
+  --color-info: #6366f1;
+
+  --color-text: #f2f2f5;
+  --color-text-muted: #a3a3b0;
+  --color-text-faint: #6b6b78;
+
+  --gradient-accent: linear-gradient(135deg, #00e0ff 0%, #6366f1 100%);
+  --gradient-accent-2: linear-gradient(135deg, #ff6a1a 0%, #ff4d4f 100%);
+  --gradient-hero: linear-gradient(180deg, rgba(8,8,11,0) 0%, rgba(8,8,11,0.85) 70%, #08080b 100%);
+  --gradient-radial: radial-gradient(circle at 20% 20%, rgba(0,224,255,0.12), transparent 45%),
+                      radial-gradient(circle at 80% 60%, rgba(255,106,26,0.1), transparent 45%);
+
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.25);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.35);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.45);
+  --shadow-glow: 0 0 32px rgba(0,224,255,0.25);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 999px;
+
+  --font-heading: 'Poppins', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+
+  --container-max: 1320px;
+  --header-height: 78px;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.18s var(--ease);
+  --transition-base: 0.3s var(--ease);
+  --transition-slow: 0.6s var(--ease);
+}
+
+/* ---------------------------------------------------------------------------
+   Reset
+--------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: var(--gradient-radial);
+  background-attachment: fixed;
+}
+
+img, picture, video, canvas, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+button, input, textarea, select { font: inherit; color: inherit; background: none; border: none; }
+button { cursor: pointer; }
+input, textarea, select { outline: none; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 700; }
+h2 { font-size: clamp(1.7rem, 3.5vw, 2.6rem); font-weight: 700; }
+h3 { font-size: clamp(1.25rem, 2.5vw, 1.6rem); }
+h4 { font-size: 1.15rem; }
+
+p { color: var(--color-text-muted); }
+
+::selection { background: var(--color-accent); color: #000; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-surface-2); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-border-strong); }
+
+/* ---------------------------------------------------------------------------
+   Layout helpers
+--------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.section { padding-block: clamp(56px, 8vw, 96px); }
+.section-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; }
+.section-head.row { flex-direction: row; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--color-accent);
+}
+.eyebrow::before { content: ''; width: 22px; height: 2px; background: var(--color-accent); border-radius: 2px; }
+
+.text-muted { color: var(--color-text-muted); }
+.text-center { text-align: center; }
+.mt-1 { margin-top: 8px; } .mt-2 { margin-top: 16px; } .mt-3 { margin-top: 24px; } .mt-4 { margin-top: 40px; }
+.mb-1 { margin-bottom: 8px; } .mb-2 { margin-bottom: 16px; } .mb-3 { margin-bottom: 24px; } .mb-4 { margin-bottom: 40px; }
+
+.grid { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.flex { display: flex; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.gap-1 { gap: 8px; } .gap-2 { gap: 16px; } .gap-3 { gap: 24px; }
+
+@media (max-width: 1080px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .container { padding-inline: 18px; }
+}
+
+/* ---------------------------------------------------------------------------
+   Glassmorphism base
+--------------------------------------------------------------------------- */
+.glass {
+  background: var(--color-glass);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--color-border);
+}
+
+.glass-strong {
+  background: var(--color-glass-strong);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--color-border-strong);
+}
+
+/* ---------------------------------------------------------------------------
+   Fade / reveal utility (paired with AOS but also used standalone)
+--------------------------------------------------------------------------- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity var(--transition-slow), transform var(--transition-slow); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ---------------------------------------------------------------------------
+   Page loader
+--------------------------------------------------------------------------- */
+#page-loader {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-bg);
+  transition: opacity 0.5s var(--ease), visibility 0.5s var(--ease);
+}
+#page-loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-bike {
+  width: 64px; height: 64px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
