@@ -20,7 +20,7 @@ async function getUser() {
 
 export async function getWishlistItems() {
   const user = await getUser();
-  if (!user) return readLocal();
+  if (!user) return readLocal().map(item => ({ ...item, rowId: item.itemId }));
 
   const { data, error } = await supabase
     .from('wishlist')

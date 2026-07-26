@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parts & Accessories | Ode Works</title>
+  <meta name="description" content="Shop helmets, riding gear, parts, and accessories at Ode Works.">
+  <link rel="icon" href="assets/img/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/customer.css">
+</head>
+<body>
+
+  <div id="page-loader"><div class="loader-bike"></div></div>
+  <div data-include="partials/header.html"></div>
+
+  <main>
+    <section class="section" style="padding-top:140px;">
+      <div class="container">
+        <div class="breadcrumbs"><a href="index.html">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Parts &amp; Accessories</span></div>
+        <div class="section-head">
+          <span class="eyebrow">Gear Up</span>
+          <h1>Parts &amp; Accessories</h1>
+          <p>Helmets, riding gear, performance parts, and accessories for every rider.</p>
+        </div>
+
+        <div class="category-scroller mb-3" id="category-scroller"></div>
+
+        <div class="filter-layout">
+          <aside class="filter-sidebar card glass">
+            <div class="filter-group">
+              <h4>Search</h4>
+              <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="form-control" id="search-input" placeholder="Search products...">
+              </div>
+            </div>
+            <div class="filter-group">
+              <h4>Category</h4>
+              <div id="category-filters"><!-- injected --></div>
+            </div>
+            <div class="filter-group">
+              <h4>Price Range</h4>
+              <input type="range" min="0" max="40000" step="500" value="40000" class="range-slider" id="price-range">
+              <div class="flex-between mt-1" style="font-size:0.82rem;">
+                <span>₱0</span>
+                <span id="price-range-value">₱40,000</span>
+              </div>
+            </div>
+            <button class="btn btn-outline btn-block" id="clear-filters-btn">Clear Filters</button>
+          </aside>
+
+          <div>
+            <div class="results-toolbar">
+              <span class="text-muted" id="results-count">Loading...</span>
+              <div class="select-wrap">
+                <select class="form-control" id="sort-select">
+                  <option value="newest">Newest</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="rating">Top Rated</option>
+                </select>
+              </div>
+            </div>
+            <div class="product-grid" id="product-grid"></div>
+            <div class="pagination" id="pagination"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script type="module" src="assets/js/includes.js"></script>
+  <script type="module" src="assets/js/nav.js"></script>
+  <script type="module" src="assets/js/pages/parts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 700, once: true, offset: 60 });
+    window.addEventListener('load', () => document.getElementById('page-loader')?.classList.add('hidden'));
+  </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financing Calculator | Ode Works</title>
+  <meta name="description" content="Estimate your monthly motorcycle financing payment at Ode Works.">
+  <link rel="icon" href="assets/img/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/customer.css">
+</head>
+<body>
+
+  <div id="page-loader"><div class="loader-bike"></div></div>
+  <div data-include="partials/header.html"></div>
+
+  <main>
+    <section class="section" style="padding-top:140px;">
+      <div class="container">
+        <div class="breadcrumbs"><a href="index.html">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Financing Calculator</span></div>
+        <div class="section-head text-center" style="align-items:center;">
+          <span class="eyebrow">Plan Your Purchase</span>
+          <h1>Financing Calculator</h1>
+          <p style="max-width:560px;margin-inline:auto;">Estimate your monthly payments before visiting the showroom. Final terms are subject to bank/financing partner approval.</p>
+        </div>
+
+        <div class="calc-layout">
+          <div class="card glass" style="padding:32px;">
+            <div class="form-group">
+              <label>Select a Motorcycle (optional)</label>
+              <div class="select-wrap">
+                <select class="form-control" id="moto-select">
+                  <option value="">Enter price manually</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Motorcycle Price</label>
+              <input type="number" class="form-control" id="price-input" value="589000" min="0" step="1000">
+            </div>
+            <div class="form-group">
+              <label>Down Payment: <span id="down-payment-label"></span></label>
+              <input type="range" class="calc-range" id="down-payment-range" min="10" max="80" value="20">
+            </div>
+            <div class="form-group">
+              <label>Loan Term</label>
+              <div class="select-wrap">
+                <select class="form-control" id="term-select">
+                  <option value="12">12 months</option>
+                  <option value="24" selected>24 months</option>
+                  <option value="36">36 months</option>
+                  <option value="48">48 months</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Annual Interest Rate: <span id="rate-label"></span></label>
+              <input type="range" class="calc-range" id="rate-range" min="4" max="24" step="0.5" value="12">
+            </div>
+          </div>
+
+          <div class="calc-result card glass-strong">
+            <span class="eyebrow">Estimated Monthly Payment</span>
+            <div class="monthly mt-2" id="monthly-payment">₱0</div>
+            <p class="text-muted">per month for <span id="term-echo">24</span> months</p>
+            <hr class="divider">
+            <div class="calc-breakdown-row"><span>Motorcycle Price</span><strong id="breakdown-price">₱0</strong></div>
+            <div class="calc-breakdown-row"><span>Down Payment</span><strong id="breakdown-down">₱0</strong></div>
+            <div class="calc-breakdown-row"><span>Loan Amount</span><strong id="breakdown-loan">₱0</strong></div>
+            <div class="calc-breakdown-row"><span>Total Interest</span><strong id="breakdown-interest">₱0</strong></div>
+            <div class="calc-breakdown-row"><span>Total Payable</span><strong id="breakdown-total">₱0</strong></div>
+            <a href="contact.html" class="btn btn-primary btn-block mt-3">Talk to Our Team</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script type="module" src="assets/js/includes.js"></script>
+  <script type="module" src="assets/js/nav.js"></script>
+  <script type="module" src="assets/js/pages/financing.js"></script>
+  <script>
+    window.addEventListener('load', () => document.getElementById('page-loader')?.classList.add('hidden'));
+  </script>
+</body>
+</html>

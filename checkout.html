@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Ode Works</title>
+  <link rel="icon" href="assets/img/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/customer.css">
+</head>
+<body>
+
+  <div id="page-loader"><div class="loader-bike"></div></div>
+  <div data-include="partials/header.html"></div>
+
+  <main>
+    <section class="section" style="padding-top:140px;">
+      <div class="container">
+        <div class="breadcrumbs"><a href="index.html">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <a href="cart.html">Cart</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Checkout</span></div>
+        <div class="section-head">
+          <span class="eyebrow">Almost There</span>
+          <h1>Checkout</h1>
+        </div>
+
+        <div class="checkout-layout">
+          <div class="card glass" style="padding:28px;">
+            <h3 class="mb-3">Shipping Information</h3>
+            <form id="checkout-form">
+              <div class="form-row">
+                <div class="form-group"><label>Full Name</label><input type="text" class="form-control" name="full_name" required></div>
+                <div class="form-group"><label>Phone Number</label><input type="tel" class="form-control" name="phone" required></div>
+              </div>
+              <div class="form-group"><label>Street Address</label><input type="text" class="form-control" name="street" required></div>
+              <div class="form-row">
+                <div class="form-group"><label>City</label><input type="text" class="form-control" name="city" required value="Quezon City"></div>
+                <div class="form-group"><label>Postal Code</label><input type="text" class="form-control" name="postal_code" required></div>
+              </div>
+              <div class="form-group"><label>Order Notes (optional)</label><textarea class="form-control" name="notes" placeholder="Delivery instructions..."></textarea></div>
+
+              <h3 class="mb-2 mt-3">Payment Method</h3>
+              <p class="form-hint mb-2">We do not process online card payments yet. Choose one of the options below — our team will confirm payment with you directly.</p>
+              <label class="payment-option selected">
+                <input type="radio" name="payment_method" value="cod" checked>
+                <div><strong>Cash on Delivery</strong><div class="text-muted" style="font-size:0.82rem;">Pay in cash when your order arrives.</div></div>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="payment_method" value="bank_transfer">
+                <div><strong>Bank Transfer</strong><div class="text-muted" style="font-size:0.82rem;">Transfer to our account; details sent after checkout.</div></div>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="payment_method" value="gcash">
+                <div><strong>GCash</strong><div class="text-muted" style="font-size:0.82rem;">Send payment via GCash; enter your reference number below.</div></div>
+              </label>
+              <div class="form-group mt-2" id="payment-ref-group" style="display:none;">
+                <label>Payment Reference Number</label>
+                <input type="text" class="form-control" name="payment_reference" placeholder="e.g. GCash reference number">
+              </div>
+            </form>
+          </div>
+
+          <div class="card summary-box">
+            <h3 class="mb-3">Order Summary</h3>
+            <div id="checkout-items-list"></div>
+            <hr class="divider">
+            <div class="summary-row"><span>Subtotal</span><strong id="co-subtotal">₱0</strong></div>
+            <div class="summary-row"><span>Shipping</span><strong id="co-shipping">₱0</strong></div>
+            <div class="summary-row" id="co-discount-row" style="display:none;"><span>Discount</span><strong id="co-discount">-₱0</strong></div>
+            <div class="summary-row total"><span>Total</span><strong id="co-total">₱0</strong></div>
+            <button class="btn btn-primary btn-block btn-lg mt-3" id="place-order-btn">
+              <span class="btn-label">Place Order</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script type="module" src="assets/js/includes.js"></script>
+  <script type="module" src="assets/js/nav.js"></script>
+  <script type="module" src="assets/js/pages/checkout.js"></script>
+  <script>
+    window.addEventListener('load', () => document.getElementById('page-loader')?.classList.add('hidden'));
+  </script>
+</body>
+</html>

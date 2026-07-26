@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Ode Works</title>
+  <meta name="description" content="Learn about Ode Works — a premium motorcycle dealership in Galas, Quezon City, Philippines.">
+  <link rel="icon" href="assets/img/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/customer.css">
+</head>
+<body>
+
+  <div id="page-loader"><div class="loader-bike"></div></div>
+  <div data-include="partials/header.html"></div>
+
+  <main>
+    <section class="about-hero" style="background-image:url('https://placehold.co/1920x900/0d0d0d/00e0ff?text=Ode+Works');">
+      <div class="container">
+        <span class="eyebrow">Since 2007</span>
+        <h1>Built by Riders, For Riders</h1>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="grid grid-2" style="align-items:center;gap:56px;" data-aos="fade-up">
+        <div>
+          <span class="eyebrow">Our Story</span>
+          <h2 class="mt-2 mb-2">Ode Works Motorcycle Dealership</h2>
+          <p>Ode Works started as a small repair shop in Galas, Quezon City in 2007. Today, we've grown into a full-service motorcycle dealership — offering new bikes from six global brands, genuine parts and accessories, and a certified service center trusted by thousands of riders across Metro Manila.</p>
+          <p class="mt-2">Our mission is simple: make every rider's journey safer, smoother, and more enjoyable — from the moment they walk into our showroom to every service visit after.</p>
+        </div>
+        <img src="https://placehold.co/700x500/1a1a1a/fff?text=Our+Showroom" alt="Ode Works showroom" style="border-radius:var(--radius-lg);">
+      </div>
+    </section>
+
+    <section class="section" style="background:var(--color-bg-alt);">
+      <div class="container">
+        <div class="section-head text-center" style="align-items:center;" data-aos="fade-up">
+          <span class="eyebrow">What Drives Us</span>
+          <h2>Our Core Values</h2>
+        </div>
+        <div class="grid grid-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card value-card"><i class="fa-solid fa-shield-halved" style="font-size:1.8rem;color:var(--color-accent);"></i><h4 class="mt-2">Integrity</h4><p class="mt-1">Transparent pricing, honest recommendations, no hidden fees.</p></div>
+          <div class="card value-card"><i class="fa-solid fa-bullseye" style="font-size:1.8rem;color:var(--color-accent);"></i><h4 class="mt-2">Expertise</h4><p class="mt-1">Factory-trained mechanics and knowledgeable sales staff.</p></div>
+          <div class="card value-card"><i class="fa-solid fa-handshake" style="font-size:1.8rem;color:var(--color-accent);"></i><h4 class="mt-2">Community</h4><p class="mt-1">Supporting local riders' clubs and motorcycle events.</p></div>
+          <div class="card value-card"><i class="fa-solid fa-leaf" style="font-size:1.8rem;color:var(--color-accent);"></i><h4 class="mt-2">Sustainability</h4><p class="mt-1">Promoting responsible riding and eco-conscious practices.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="section-head text-center" style="align-items:center;" data-aos="fade-up">
+        <span class="eyebrow">Our Journey</span>
+        <h2>Milestones</h2>
+      </div>
+      <div class="timeline" style="max-width:640px;margin-inline:auto;" data-aos="fade-up" data-aos-delay="100">
+        <div class="timeline-item"><span class="year">2007</span><h4>Ode Works Founded</h4><p>Opened our first repair shop in Galas, Quezon City.</p></div>
+        <div class="timeline-item"><span class="year">2013</span><h4>Became an Authorized Dealer</h4><p>Started selling new motorcycles from Yamaha and Honda.</p></div>
+        <div class="timeline-item"><span class="year">2018</span><h4>Expanded Showroom</h4><p>Added Kawasaki, Ducati, KTM, and Royal Enfield to our lineup.</p></div>
+        <div class="timeline-item"><span class="year">2024</span><h4>12,000+ Riders Served</h4><p>Crossed a major milestone in customers served across Metro Manila.</p></div>
+        <div class="timeline-item"><span class="year">2026</span><h4>Launched Online Store</h4><p>Bringing the full Ode Works experience online.</p></div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="cta-band glass" data-aos="zoom-in">
+        <span class="eyebrow">Visit Us</span>
+        <h2 class="mt-2">Come See Us in Galas, Quezon City</h2>
+        <div class="hero-cta flex-center mt-3">
+          <a href="contact.html" class="btn btn-primary btn-lg">Get Directions</a>
+          <a href="motorcycles.html" class="btn btn-secondary btn-lg">Shop Motorcycles</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script type="module" src="assets/js/includes.js"></script>
+  <script type="module" src="assets/js/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 700, once: true, offset: 60 });
+    window.addEventListener('load', () => document.getElementById('page-loader')?.classList.add('hidden'));
+  </script>
+</body>
+</html>

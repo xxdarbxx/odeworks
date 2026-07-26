@@ -23,7 +23,7 @@ async function getUser() {
 
 export async function getCartItems() {
   const user = await getUser();
-  if (!user) return readLocal();
+  if (!user) return readLocal().map(item => ({ ...item, cartRowId: item.itemId }));
 
   const { data, error } = await supabase
     .from('cart')

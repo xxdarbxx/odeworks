@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Motorcycle Details | Ode Works</title>
+  <link rel="icon" href="assets/img/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/customer.css">
+</head>
+<body>
+
+  <div id="page-loader"><div class="loader-bike"></div></div>
+  <div data-include="partials/header.html"></div>
+
+  <main>
+    <section class="section" style="padding-top:140px;">
+      <div class="container">
+        <div class="breadcrumbs"><a href="index.html">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <a href="motorcycles.html">Motorcycles</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span id="breadcrumb-name">Loading...</span></div>
+
+        <div id="detail-root" class="detail-layout">
+          <div class="skeleton skeleton-card" style="height:480px;"></div>
+          <div>
+            <div class="skeleton skeleton-line" style="width:40%;"></div>
+            <div class="skeleton skeleton-line" style="width:70%;height:32px;"></div>
+            <div class="skeleton skeleton-line" style="width:30%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="reviews-section" style="display:none;">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="overview">Overview</button>
+        <button class="tab-btn" data-tab="specs">Full Specifications</button>
+        <button class="tab-btn" data-tab="reviews">Reviews</button>
+      </div>
+
+      <div class="detail-tabs-content" data-tab-content="overview">
+        <p id="overview-text"></p>
+        <h4 class="mt-3 mb-2">Highlights</h4>
+        <div class="grid grid-3" id="highlights-grid"></div>
+      </div>
+
+      <div class="detail-tabs-content" data-tab-content="specs" style="display:none;">
+        <div class="detail-specs-grid" id="full-specs-grid"></div>
+      </div>
+
+      <div class="detail-tabs-content" data-tab-content="reviews" style="display:none;">
+        <div class="review-summary card glass" id="review-summary"></div>
+        <div id="review-list"></div>
+        <button class="btn btn-secondary mt-2" id="write-review-btn">Write a Review</button>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="section-head row">
+        <div><span class="eyebrow">You May Also Like</span><h2>Related Motorcycles</h2></div>
+      </div>
+      <div class="product-grid" id="related-grid"></div>
+    </section>
+  </main>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script type="module" src="assets/js/includes.js"></script>
+  <script type="module" src="assets/js/nav.js"></script>
+  <script type="module" src="assets/js/pages/motorcycle-details.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 700, once: true, offset: 60 });
+    window.addEventListener('load', () => document.getElementById('page-loader')?.classList.add('hidden'));
+  </script>
+</body>
+</html>
