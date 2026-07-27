@@ -3,43 +3,43 @@
    ============================================================================ */
 
 :root {
-  /* Brand palette - dark premium dealership theme */
-  --color-bg: #08080b;
-  --color-bg-alt: #0f0f14;
-  --color-surface: #14141b;
-  --color-surface-2: #1a1a23;
-  --color-glass: rgba(255, 255, 255, 0.045);
-  --color-glass-strong: rgba(255, 255, 255, 0.08);
+  /* Brand palette - warm graphite workshop theme (not tech-SaaS neon) */
+  --color-bg: #15130f;
+  --color-bg-alt: #1c1914;
+  --color-surface: #221e18;
+  --color-surface-2: #2b261e;
+  --color-glass: rgba(255, 255, 255, 0.05);
+  --color-glass-strong: rgba(255, 255, 255, 0.09);
   --color-border: rgba(255, 255, 255, 0.09);
-  --color-border-strong: rgba(255, 255, 255, 0.16);
+  --color-border-strong: rgba(255, 255, 255, 0.17);
 
-  --color-accent: #00e0ff;
-  --color-accent-dim: #00b3cc;
-  --color-accent-2: #ff6a1a;
-  --color-accent-2-dim: #cc5514;
-  --color-success: #2ecc71;
-  --color-warning: #f5a623;
-  --color-danger: #ff4d4f;
-  --color-info: #6366f1;
+  --color-accent: #ff7a29;
+  --color-accent-dim: #cc5f1f;
+  --color-accent-2: #ffb703;
+  --color-accent-2-dim: #cc9202;
+  --color-success: #4caf6d;
+  --color-warning: #f2b705;
+  --color-danger: #e5484d;
+  --color-info: #7c98a6;
 
-  --color-text: #f2f2f5;
-  --color-text-muted: #a3a3b0;
-  --color-text-faint: #6b6b78;
+  --color-text: #f5f1ea;
+  --color-text-muted: #b8ada0;
+  --color-text-faint: #7a6f63;
 
-  --gradient-accent: linear-gradient(135deg, #00e0ff 0%, #6366f1 100%);
-  --gradient-accent-2: linear-gradient(135deg, #ff6a1a 0%, #ff4d4f 100%);
-  --gradient-hero: linear-gradient(180deg, rgba(8,8,11,0.1) 0%, rgba(8,8,11,0.5) 55%, rgba(8,8,11,0.88) 100%);
-  --gradient-radial: radial-gradient(circle at 20% 20%, rgba(0,224,255,0.12), transparent 45%),
-                      radial-gradient(circle at 80% 60%, rgba(255,106,26,0.1), transparent 45%);
+  --gradient-accent: linear-gradient(135deg, #ff7a29 0%, #ffb703 100%);
+  --gradient-accent-2: linear-gradient(135deg, #e5484d 0%, #ff7a29 100%);
+  --gradient-hero: linear-gradient(180deg, rgba(21,19,15,0.15) 0%, rgba(21,19,15,0.55) 55%, rgba(21,19,15,0.92) 100%);
+  --gradient-radial: radial-gradient(circle at 15% 15%, rgba(255,122,41,0.10), transparent 45%),
+                      radial-gradient(circle at 85% 65%, rgba(255,183,3,0.07), transparent 45%);
 
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.25);
-  --shadow-md: 0 8px 24px rgba(0,0,0,0.35);
-  --shadow-lg: 0 20px 60px rgba(0,0,0,0.45);
-  --shadow-glow: 0 0 32px rgba(0,224,255,0.25);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+  --shadow-glow: 0 0 32px rgba(255,122,41,0.25);
 
   --radius-sm: 8px;
   --radius-md: 14px;
-  --radius-lg: 22px;
+  --radius-lg: 20px;
   --radius-full: 999px;
 
   --font-heading: 'Poppins', 'Segoe UI', sans-serif;
@@ -82,19 +82,19 @@ input, textarea, select { outline: none; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
 }
 
-h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 700; }
-h2 { font-size: clamp(1.7rem, 3.5vw, 2.6rem); font-weight: 700; }
+h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); font-weight: 800; }
+h2 { font-size: clamp(1.8rem, 3.6vw, 2.7rem); font-weight: 700; }
 h3 { font-size: clamp(1.25rem, 2.5vw, 1.6rem); }
 h4 { font-size: 1.15rem; }
 
 p { color: var(--color-text-muted); }
 
-::selection { background: var(--color-accent); color: #000; }
+::selection { background: var(--color-accent); color: #1a0d02; }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--color-bg); }
@@ -111,12 +111,12 @@ p { color: var(--color-text-muted); }
   padding-inline: 24px;
 }
 
-.section { padding-block: clamp(56px, 8vw, 96px); }
+.section { padding-block: clamp(56px, 8vw, 100px); }
 .section-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; }
 .section-head.row { flex-direction: row; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
-  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--color-accent);
 }
 .eyebrow::before { content: ''; width: 22px; height: 2px; background: var(--color-accent); border-radius: 2px; }
@@ -145,19 +145,18 @@ p { color: var(--color-text-muted); }
 }
 
 /* ---------------------------------------------------------------------------
-   Glassmorphism base
+   Surface treatments (mostly-solid cards; blur used sparingly, not the
+   dominant look, per the "less glass, more workshop" direction)
 --------------------------------------------------------------------------- */
 .glass {
-  background: var(--color-glass);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
 }
 
 .glass-strong {
-  background: var(--color-glass-strong);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: var(--color-surface-2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--color-border-strong);
 }
 
